@@ -8,7 +8,7 @@ class PomoTimer extends React.Component {
       time: 25*60,
       start: 25*60,
       isRunning: false,
-      tasks: ["test", "test2"]
+      tasks: {}
     }
     this.startTimer = this.startTimer.bind(this)
     this.pauseTimer = this.pauseTimer.bind(this)
@@ -62,11 +62,17 @@ class PomoTimer extends React.Component {
   }
   addTask(e) {
     e.preventDefault();
-
     var newTask = this.refs.taskName.value;
-    this.refs.taskForm.reset();
-    this.state.tasks.push(newTask);
-    this.setState({tasks: this.state.tasks})
+    if(newTask != null && newTask !== "") {
+
+      var now = new Date();
+      var timestamp = now.getHours()+":"+now.getMinutes();
+      var tasks = this.state.tasks
+      tasks[timestamp] = newTask;
+      this.refs.taskForm.reset();
+      // this.state.tasks.push(newTask);
+      this.setState({tasks: tasks})
+    }
   }
 
   processTime(time) {
@@ -123,7 +129,7 @@ class PomoTimer extends React.Component {
             } */}
               {
                 Object.keys(this.state.tasks).map(function(key) {
-                  return <div className="list-group-item list-group-item-info">{this.state.tasks[key]}</div>
+                  return <div className="list-group-item list-group-item-info">{key} - {this.state.tasks[key]}</div>
                 }.bind(this))
               }
 
