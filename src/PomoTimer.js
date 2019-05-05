@@ -30,8 +30,15 @@ class PomoTimer extends React.Component {
     this.n.close(event.target.tag);
   }
   startTimer() {
-    if(!this.state.isRunning) {
-
+    if(!this.state.isRunning || this.state.time == 0) {
+      if(this.state.time == 0) {
+        console.log("WOW");
+        this.setState({
+          time: this.state.start
+        })
+      } else {
+        console.log(this.state.time)
+      }
       this.setState({
         isRunning: true,
       })
@@ -85,7 +92,7 @@ class PomoTimer extends React.Component {
       }
       return minutes+":"+seconds;
     } else {
-      clearInterval(this.timer)
+      clearInterval(this.timer);
       this.showNotifications();
       //Do a notification
       return "0:00";
