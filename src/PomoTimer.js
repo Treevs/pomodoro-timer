@@ -73,12 +73,20 @@ class PomoTimer extends React.Component {
     if(newTask != null && newTask !== "") {
 
       var now = new Date();
-      var timestamp = now.getHours()+":"+now.getMinutes();
+      var timestamp = this.padTime(now.getHours())+":"+this.padTime(now.getMinutes())+":"+this.padTime(now.getSeconds());
       var tasks = this.state.tasks
       tasks[timestamp] = newTask;
       this.refs.taskForm.reset();
       // this.state.tasks.push(newTask);
       this.setState({tasks: tasks})
+    }
+  }
+
+  padTime(time) {
+    if(time < 10) {
+      return "0" + time;
+    } else {
+      return time;
     }
   }
 
@@ -112,21 +120,34 @@ class PomoTimer extends React.Component {
               onClick={event => this.handleNotificationClick(event)}
             
             />
-            <div className="length-buttons">
-              <button onClick={this.setPomodoro}>Pomodoro</button>
-              <button onClick={this.setShortBreak}>Short Break</button>
-              <button onClick={this.setLongBreak}>Long Break</button>
+
+            <div className="btn-group length-buttons" role="group">
+              <div className="btn-group" role="group" aria-label="Basic example">
+
+                <button className="btn btn-primary" onClick={this.setPomodoro}>Pomodoro</button>
+                <button className="btn btn-primary" onClick={this.setShortBreak}>Short Break</button>
+                <button className="btn btn-primary" onClick={this.setLongBreak}>Long Break</button>
+              </div>
             </div>
-            {this.processTime(this.state.time)}
-            <div className="control-buttons">
-              <form ref="taskForm" onSubmit={this.addTask}>
-                <button ype="submit" onClick={this.startTimer}>Start</button>
-                <input type="text" ref="taskName" placeholder="Task"/>
-              </form>
+            <div>
+              {this.processTime(this.state.time)}
+            </div>
+            <div className="control-buttons justify-content-md-center">
+              <div className="" aria-label="Basic example">
+                <form className="offset-sm-2 col-sm-8" ref="taskForm" onSubmit={this.addTask}>
+                  <input className="form-control" type="text" ref="taskName" placeholder="Task"/>
+                  <div className="input-group-append">
+                    <button className="btn btn-primary" type="submit">Add Task</button>
+                  </div>
+                </form>
+              </div>
             </div>
             <div className="control-buttons">
-              <button onClick={this.pauseTimer}>Pause</button>
-              <button onClick={this.resetTimer}>Reset</button>
+              <div className="btn-group" role="group" aria-label="Basic example">
+                <button className="btn btn-primary" onClick={this.startTimer}>Start</button>
+                <button className="btn btn-primary" onClick={this.pauseTimer}>Pause</button>
+                <button className="btn btn-primary" onClick={this.resetTimer}>Reset</button>
+              </div>
             </div>
             {/* {this.state.tasks.map(task => {
               return (
@@ -136,7 +157,7 @@ class PomoTimer extends React.Component {
             } */}
               {
                 Object.keys(this.state.tasks).map(function(key) {
-                  return <div className="list-group-item list-group-item-info">{key} - {this.state.tasks[key]}</div>
+                  return <div key={key} className="list-group-item list-group-item-info">{key} - {this.state.tasks[key]}</div>
                 }.bind(this))
               }
 
