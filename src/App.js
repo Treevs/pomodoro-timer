@@ -7,7 +7,10 @@ import PomoTimer from './PomoTimer';
 function App() {
   return (
     <div className="App">
-      <PomoTimer></PomoTimer>
+      <div className="card-flex">
+        <PomoTimer></PomoTimer>
+        <PomoTimer></PomoTimer>
+      </div>
     </div>
   );
 }

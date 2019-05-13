@@ -109,7 +109,7 @@ class PomoTimer extends React.Component {
   
   render() {
     return (
-        <div>
+        <div className="card">
             <ReactNotifications
               onRef={ref => (this.n = ref)} // Required
               title="Pomodoro" // Required
@@ -120,33 +120,37 @@ class PomoTimer extends React.Component {
               onClick={event => this.handleNotificationClick(event)}
             
             />
+            <div class="card-header">
+              Featured
+            </div>
+            <div className="card-body">
+              <div className="length-buttons" role="group">
+                <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
 
-            <div className="btn-group length-buttons" role="group">
-              <div className="btn-group" role="group" aria-label="Basic example">
-
-                <button className="btn btn-primary" onClick={this.setPomodoro}>Pomodoro</button>
-                <button className="btn btn-primary" onClick={this.setShortBreak}>Short Break</button>
-                <button className="btn btn-primary" onClick={this.setLongBreak}>Long Break</button>
+                  <button className="btn btn-sm btn-primary" onClick={this.setPomodoro}>Pomodoro</button>
+                  <button className="btn btn-sm btn-primary" onClick={this.setShortBreak}>Short Break</button>
+                  <button className="btn btn-sm btn-primary" onClick={this.setLongBreak}>Long Break</button>
+                </div>
               </div>
-            </div>
-            <div>
-              <h1>{this.processTime(this.state.time)}</h1>
-            </div>
-            <div className="control-buttons justify-content-md-center">
-              <div className="" aria-label="Basic example">
-                <form className="offset-sm-2 col-sm-8 input-group" ref="taskForm" onSubmit={this.addTask}>
-                  <input className="form-control" type="text" ref="taskName" placeholder="Task"/>
-                  <div className="input-group-append">
-                    <button className="btn btn-primary" type="submit">Add Task</button>
-                  </div>
-                </form>
+              <div>
+                <h1>{this.processTime(this.state.time)}</h1>
               </div>
-            </div>
-            <div className="control-buttons">
-              <div className="btn-group" role="group" aria-label="Basic example">
-                <button className="btn btn-primary" onClick={this.startTimer}>Start</button>
-                <button className="btn btn-primary" onClick={this.pauseTimer}>Pause</button>
-                <button className="btn btn-primary" onClick={this.resetTimer}>Reset</button>
+              <div className="control-buttons justify-content-md-center">
+                <div className="" aria-label="Basic example">
+                  <form className="offset-sm-2 col-sm-8 input-group input-group-sm" ref="taskForm" onSubmit={this.addTask}>
+                    <input className="form-control form-control-sm" type="text" ref="taskName" placeholder="Task"/>
+                    <div className="input-group-append">
+                      <button className="btn btn-sm btn-primary" type="submit">Add Task</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div className="control-buttons">
+                <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                  <button className="btn btn-sm btn-primary" onClick={this.startTimer}>Start</button>
+                  <button className="btn btn-sm btn-primary" onClick={this.pauseTimer}>Pause</button>
+                  <button className="btn btn-sm btn-primary" onClick={this.resetTimer}>Reset</button>
+                </div>
               </div>
             </div>
             {/* {this.state.tasks.map(task => {
