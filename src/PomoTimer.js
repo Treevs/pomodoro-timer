@@ -130,11 +130,11 @@ class PomoTimer extends React.Component {
               </div>
             </div>
             <div>
-              {this.processTime(this.state.time)}
+              <h1>{this.processTime(this.state.time)}</h1>
             </div>
             <div className="control-buttons justify-content-md-center">
               <div className="" aria-label="Basic example">
-                <form className="offset-sm-2 col-sm-8" ref="taskForm" onSubmit={this.addTask}>
+                <form className="offset-sm-2 col-sm-8 input-group" ref="taskForm" onSubmit={this.addTask}>
                   <input className="form-control" type="text" ref="taskName" placeholder="Task"/>
                   <div className="input-group-append">
                     <button className="btn btn-primary" type="submit">Add Task</button>
