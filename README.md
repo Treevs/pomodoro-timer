@@ -1,19 +1,7 @@
-# Life Dashboard
+# Pomodoro Timer
 
 ## What it is
 
-Life Dashboard is a collection of useful applications written in React.
+Pomodoro Timer is a timer for the (Pomodoro Technique)[https://en.wikipedia.org/wiki/Pomodoro_Technique] written in React.
 
-Current applications:
-
-* Pomodoro Timer
-
-Potential applications: 
-
-* To Do List
-* Note Pad
-* Calendar
-* Weather
-* Rainout Checker (or check weather for static day(s) of the week
-* Stocks
-* Package Tracker
+Currently not complete, the timer counts down extremely fast to help with development, should be removed next commit. 
