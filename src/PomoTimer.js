@@ -44,7 +44,7 @@ class PomoTimer extends React.Component {
       })
       this.timer = setInterval(() => this.setState({
         time: this.state.time - 1
-      }), 1);
+      }), 1000);
     }
   }
   pauseTimer() {
@@ -109,7 +109,7 @@ class PomoTimer extends React.Component {
   
   render() {
     return (
-        <div className="card">
+        <div className="card col-sm-6">
             <ReactNotifications
               onRef={ref => (this.n = ref)} // Required
               title="Pomodoro" // Required
@@ -121,7 +121,7 @@ class PomoTimer extends React.Component {
             
             />
             <div class="card-header">
-              Featured
+              Pomodoro Timer
             </div>
             <div className="card-body">
               <div className="length-buttons" role="group">
@@ -135,6 +135,13 @@ class PomoTimer extends React.Component {
               <div>
                 <h1>{this.processTime(this.state.time)}</h1>
               </div>
+              <div className="control-buttons">
+                <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                  <button className="btn btn-sm btn-primary" onClick={this.startTimer}>Start</button>
+                  <button className="btn btn-sm btn-primary" onClick={this.pauseTimer}>Pause</button>
+                  <button className="btn btn-sm btn-primary" onClick={this.resetTimer}>Reset</button>
+                </div>
+              </div>
               <div className="control-buttons justify-content-md-center">
                 <div className="" aria-label="Basic example">
                   <form className="offset-sm-2 col-sm-8 input-group input-group-sm" ref="taskForm" onSubmit={this.addTask}>
@@ -143,13 +150,6 @@ class PomoTimer extends React.Component {
                       <button className="btn btn-sm btn-primary" type="submit">Add Task</button>
                     </div>
                   </form>
-                </div>
-              </div>
-              <div className="control-buttons">
-                <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                  <button className="btn btn-sm btn-primary" onClick={this.startTimer}>Start</button>
-                  <button className="btn btn-sm btn-primary" onClick={this.pauseTimer}>Pause</button>
-                  <button className="btn btn-sm btn-primary" onClick={this.resetTimer}>Reset</button>
                 </div>
               </div>
             </div>

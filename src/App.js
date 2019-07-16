@@ -9,7 +9,6 @@ function App() {
     <div className="App">
       <div className="card-flex">
         <PomoTimer></PomoTimer>
-        <PomoTimer></PomoTimer>
       </div>
     </div>
   );
