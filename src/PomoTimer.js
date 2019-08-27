@@ -98,11 +98,14 @@ class PomoTimer extends React.Component {
       if(seconds < 10) {
         seconds = "0" + seconds;
       }
+      
+      document.title = minutes+":"+seconds + " left";
       return minutes+":"+seconds;
     } else {
       clearInterval(this.timer);
       this.showNotifications();
       //Do a notification
+      document.title = "Time's Up!";
       return "0:00";
     }
   }
@@ -116,7 +119,7 @@ class PomoTimer extends React.Component {
               body={"Your " + this.state.start/60 + " minutes are up!"}
               icon="icon.png"
               tag="expired-time"
-              timeout="2000"
+              timeout="20000"
               onClick={event => this.handleNotificationClick(event)}
             
             />
