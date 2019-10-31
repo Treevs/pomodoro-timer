@@ -1,17 +1,33 @@
 import React from 'react';
 import ReactNotifications from 'react-browser-notifications';
+const store = require('store');
+
 
 class PomoTimer extends React.Component {
+  
   constructor(props){
-    super(props)
+    
+    super(props);
+    var pomoTime = store.get('pomoTime');
+    if(!pomoTime) {
+      pomoTime = 25*60;
+    }
+    var shortTime = store.get('shortTime');
+    if(!shortTime) {
+      shortTime = 5*60;
+    }
+    var longTime = store.get('longTime');
+    if(!longTime) {
+      longTime = 15*60;
+    }
     this.state = {
-      time: 25*60,
-      start: 25*60,
+      time: pomoTime,
+      start: pomoTime,
       isRunning: false,
       tasks: {},
-      pomoTime: 25*60,
-      shortTime: 5*60,
-      longTime: 15*60,
+      pomoTime: pomoTime,
+      shortTime: shortTime,
+      longTime: longTime,
       activeTimer: 1,
       editTimer: false
     }
@@ -86,22 +102,26 @@ class PomoTimer extends React.Component {
   editTimer(e) {
     e.preventDefault();
     var newTime = this.refs.newTime.value;
+    newTime = newTime*60; //Convert to minutes
     var activeTimer = this.state.activeTimer; 
     console.log(this.state.activeTimer);
     switch(activeTimer){
       case 1:
-        this.setState({pomoTime: newTime*60}, () => {
+        this.setState({pomoTime: newTime}, () => {
           this.setPomodoro();
+          store.set('pomoTime', newTime);
         });
         break;
       case 2:
-        this.setState({shortTime: newTime*60}, () => {
+        this.setState({shortTime: newTime}, () => {
           this.setShortBreak();
+          store.set('shortTime', newTime);
         });
         break;
       case 3:
-        this.setState({longTime: newTime*60}, () => {
+        this.setState({longTime: newTime}, () => {
           this.setLongBreak();
+          store.set('longTime', newTime);
         });
         break;
       default:
@@ -123,6 +143,10 @@ class PomoTimer extends React.Component {
       // this.state.tasks.push(newTask);
       this.setState({tasks: tasks})
     }
+  }
+
+  removeTask() {
+
   }
 
   padTime(time) {
@@ -215,7 +239,10 @@ class PomoTimer extends React.Component {
             } */}
               {
                 Object.keys(this.state.tasks).map(function(key) {
-                  return <div key={key} className="list-group-item list-group-item-info">{key} - {this.state.tasks[key]}</div>
+                  return <div key={key} className="list-group-item list-group-item-info">
+                    {key} - {this.state.tasks[key]}
+                    <span>x</span>
+                  </div>
                 }.bind(this))
               }
 
