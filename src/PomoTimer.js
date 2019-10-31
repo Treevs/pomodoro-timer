@@ -205,13 +205,14 @@ class PomoTimer extends React.Component {
               <div>
                 <h1>{this.processTime(this.state.time)}</h1>
               </div>
-              <div className="offset-sm-4 col-sm-4 input-group input-group-sm">
-                <input className="form-control form-control-sm" type="text" ref="newTime" placeholder="New Time"/>
-                {/* <button className="btn btn-sm btn-primary" onClick={this.editTimer}>Start</button> */}
-                <div className="input-group-append">
-                  <button className="btn btn-sm btn-primary" onClick={this.editTimer}>Save</button>
+              { this.state.editTimer &&
+                <div className="offset-sm-4 col-sm-4 input-group input-group-sm">
+                  <input className="form-control form-control-sm" type="text" ref="newTime" placeholder="New Time"/>
+                  <div className="input-group-append">
+                    <button className="btn btn-sm btn-primary" onClick={this.editTimer}>Save</button>
+                  </div>
                 </div>
-              </div>
+              }
               <div className="control-buttons">
                 <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
                   <button className="btn btn-sm btn-primary" onClick={this.startTimer}>Start</button>
