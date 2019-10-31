@@ -8,8 +8,17 @@ class PomoTimer extends React.Component {
       time: 25*60,
       start: 25*60,
       isRunning: false,
-      tasks: {}
+      tasks: {},
+      pomoTime: 25*60,
+      shortTime: 5*60,
+      longTime: 15*60,
+      activeTimer: 1,
+      editTimer: false
     }
+    // Active timer
+    // 1) Pomo
+    // 2) Short
+    // 3) Long
     this.startTimer = this.startTimer.bind(this)
     this.pauseTimer = this.pauseTimer.bind(this)
     this.resetTimer = this.resetTimer.bind(this)
@@ -19,6 +28,8 @@ class PomoTimer extends React.Component {
     this.showNotifications = this.showNotifications.bind(this);
     this.handleNotificationClick = this.handleNotificationClick.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.toggleTimeEdit = this.toggleTimeEdit.bind(this);
+    this.editTimer = this.editTimer.bind(this);
   }
  
   showNotifications() {
@@ -56,17 +67,49 @@ class PomoTimer extends React.Component {
     clearInterval(this.timer)
   }
   setPomodoro() {
-    this.setState({time: 25*60, start: 25*60, isRunning: false})
+    this.setState({time: this.state.pomoTime, start: this.state.pomoTime, isRunning: false, activeTimer: 1})
     clearInterval(this.timer)
   }
   setShortBreak() {
-    this.setState({time: 5*60, start: 5*60, isRunning: false})
+    this.setState({time: this.state.shortTime, start: this.state.shortTime, isRunning: false, activeTimer: 2})
     clearInterval(this.timer)
   }
   setLongBreak() {
-    this.setState({time: 15*60, start: 15*60, isRunning: false})
+    this.setState({time: this.state.longTime, start: this.state.longTime, isRunning: false, activeTimer: 3})
     clearInterval(this.timer)
   }
+
+  toggleTimeEdit() {
+    this.setState({editTimer: !this.state.editTimer})
+  }
+
+  editTimer(e) {
+    e.preventDefault();
+    var newTime = this.refs.newTime.value;
+    var activeTimer = this.state.activeTimer; 
+    console.log(this.state.activeTimer);
+    switch(activeTimer){
+      case 1:
+        this.setState({pomoTime: newTime*60}, () => {
+          this.setPomodoro();
+        });
+        break;
+      case 2:
+        this.setState({shortTime: newTime*60}, () => {
+          this.setShortBreak();
+        });
+        break;
+      case 3:
+        this.setState({longTime: newTime*60}, () => {
+          this.setLongBreak();
+        });
+        break;
+      default:
+        // this.setState({pomoTime: newTime*60});
+        //TODO: Throw error
+    }
+  }
+
   addTask(e) {
     e.preventDefault();
     var newTask = this.refs.taskName.value;
@@ -123,7 +166,7 @@ class PomoTimer extends React.Component {
               onClick={event => this.handleNotificationClick(event)}
             
             />
-            <div class="card-header">
+            <div className="card-header">
               Pomodoro Timer
             </div>
             <div className="card-body">
@@ -138,11 +181,19 @@ class PomoTimer extends React.Component {
               <div>
                 <h1>{this.processTime(this.state.time)}</h1>
               </div>
+              <div className="offset-sm-4 col-sm-4 input-group input-group-sm">
+                <input className="form-control form-control-sm" type="text" ref="newTime" placeholder="New Time"/>
+                {/* <button className="btn btn-sm btn-primary" onClick={this.editTimer}>Start</button> */}
+                <div className="input-group-append">
+                  <button className="btn btn-sm btn-primary" onClick={this.editTimer}>Save</button>
+                </div>
+              </div>
               <div className="control-buttons">
                 <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
                   <button className="btn btn-sm btn-primary" onClick={this.startTimer}>Start</button>
                   <button className="btn btn-sm btn-primary" onClick={this.pauseTimer}>Pause</button>
                   <button className="btn btn-sm btn-primary" onClick={this.resetTimer}>Reset</button>
+                  <button className="btn btn-sm btn-primary" onClick={this.toggleTimeEdit}>Edit Time</button>
                 </div>
               </div>
               <div className="control-buttons justify-content-md-center">
