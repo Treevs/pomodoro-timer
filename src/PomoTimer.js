@@ -232,17 +232,10 @@ class PomoTimer extends React.Component {
                 </div>
               </div>
             </div>
-            {/* {this.state.tasks.map(task => {
-              return (
-                <div key={task}>{task}</div>
-              )
-              })
-            } */}
               {
                 Object.keys(this.state.tasks).map(function(key) {
                   return <div key={key} className="list-group-item list-group-item-info">
                     {key} - {this.state.tasks[key]}
-                    <span>x</span>
                   </div>
                 }.bind(this))
               }
