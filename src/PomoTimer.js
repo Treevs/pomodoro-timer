@@ -197,9 +197,9 @@ class PomoTimer extends React.Component {
               <div className="length-buttons" role="group">
                 <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
 
-                  <button className="btn btn-sm btn-primary" onClick={this.setPomodoro}>Pomodoro</button>
-                  <button className="btn btn-sm btn-primary" onClick={this.setShortBreak}>Short Break</button>
-                  <button className="btn btn-sm btn-primary" onClick={this.setLongBreak}>Long Break</button>
+                  <button className={"btn btn-sm "+ (this.state.activeTimer===1 ? 'btn-primary': '')} onClick={this.setPomodoro}>Pomodoro</button>
+                  <button className={"btn btn-sm "+ (this.state.activeTimer===2 ? 'btn-primary': '')} onClick={this.setShortBreak}>Short Break</button>
+                  <button className={"btn btn-sm "+ (this.state.activeTimer===3 ? 'btn-primary': '')} onClick={this.setLongBreak}>Long Break</button>
                 </div>
               </div>
               <div>
@@ -213,11 +213,11 @@ class PomoTimer extends React.Component {
                   </div>
                 </div>
               }
-              <div className="control-buttons">
+              <div className="control-buttons breathing-room">
                 <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                  <button className="btn btn-sm btn-primary" onClick={this.startTimer}>Start</button>
-                  <button className="btn btn-sm btn-primary" onClick={this.pauseTimer}>Pause</button>
-                  <button className="btn btn-sm btn-primary" onClick={this.resetTimer}>Reset</button>
+                  <button className={"btn btn-sm " + (this.state.isRunning ? '': 'btn-success')} onClick={this.startTimer}>Start</button>
+                  <button className={"btn btn-sm " + (this.state.isRunning ? 'btn-dark': '')} onClick={this.pauseTimer}>Pause</button>
+                  <button className="btn btn-sm btn-danger" onClick={this.resetTimer}>Reset</button>
                   <button className="btn btn-sm btn-primary" onClick={this.toggleTimeEdit}>Edit Time</button>
                 </div>
               </div>
