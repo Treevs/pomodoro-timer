@@ -17,6 +17,10 @@ code {
   width: 300px;
 } */
 
+.breathing-room {
+  margin: 5px;
+}
+
 .card-flex {
   display: flex;
   justify-content: space-around;
